@@ -8,25 +8,25 @@ export type Themes = keyof typeof themes;
 
 /* ==================== Implementation ==================== */
 
-export const systemTheme = {
+const systemTheme = {
   colorSchemes: {
     dark: false,
   },
 };
 
-export const lightTheme = {
+const lightTheme = {
   colorSchemes: {
     dark: false,
   },
 };
 
-export const darkTheme = {
+const darkTheme = {
   colorSchemes: {
     dark: true,
   },
 };
 
-export const retroTheme = {
+const retroTheme = {
   colorSchemes: {
     dark: true,
   },
