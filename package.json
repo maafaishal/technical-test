@@ -5,15 +5,26 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "prepare": "husky",
+    "postinstall": "husky install",
+    "lint-staged": "turbo run lint-staged"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.7.1",
+    "@commitlint/config-conventional": "^19.7.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.4.3",
     "prettier": "^3.4.2",
+    "sort-package-json": "^2.14.0",
     "turbo": "^2.4.0",
     "typescript": "5.7.3"
   },
   "packageManager": "pnpm@9.0.0",
   "engines": {
     "node": ">=22"
+  },
+  "lint-staged": {
+    "**/*.{json,md,css}": "pnpm format"
   }
 }
