@@ -1,39 +1,102 @@
-import RadioGroup from "@mui/material/RadioGroup";
-import Radio from "@mui/material/Radio";
-import FormControl from "@mui/material/FormControl";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormLabel from "@mui/material/FormLabel";
+"use client";
+
+import * as React from "react";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import CheckIcon from "@mui/icons-material/Check";
+import { Stack } from "@mui/material";
 
 import { useTheme } from "@/theme/ThemeContext";
-import { Themes, themeKeys } from "@/theme/themes";
 
-export const ThemeSwitcher = () => {
+import { themeKeys } from "@/theme/themes";
+
+import type { Themes } from "@/theme/themes";
+
+const OPTION_COLORS: Record<Themes, string> = {
+  system: "#ffffff",
+  light: "#ffffff",
+  dark: "#121212",
+  retro: "#ece3ca",
+};
+
+export function ThemeSwitcher() {
   const { currentTheme, changeTheme } = useTheme();
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
+  const handleDisplay = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
-    <FormControl>
-      <FormLabel id="demo-theme-toggle">Theme</FormLabel>
-      <RadioGroup
-        aria-labelledby="demo-theme-toggle"
-        name="theme-toggle"
-        row
-        value={currentTheme}
-        onChange={(event) => changeTheme(event.target.value as Themes)}
+    <>
+      <Button
+        id="basic-button"
+        aria-controls={open ? "basic-menu" : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? "true" : undefined}
+        onClick={handleDisplay}
       >
-        {themeKeys.map((themeKey) => {
-          return (
-            <FormControlLabel
-              sx={{
-                textTransform: "capitalize",
-              }}
+        Theme <KeyboardArrowDownIcon />
+      </Button>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          "aria-labelledby": "basic-button",
+          sx: {
+            padding: 1.5,
+            backgroundColor: (theme) => theme.palette.grey[200],
+          },
+        }}
+      >
+        <Stack gap={1.5}>
+          {themeKeys.map((themeKey) => (
+            <MenuItem
               key={themeKey}
-              value={themeKey}
-              control={<Radio />}
-              label={themeKey}
-            />
-          );
-        })}
-      </RadioGroup>
-    </FormControl>
+              sx={{
+                backgroundColor: OPTION_COLORS[themeKey],
+                color: (theme) =>
+                  themeKey === "dark"
+                    ? theme.palette.grey[400]
+                    : theme.palette.grey[900],
+                "&:hover": {
+                  backgroundColor: OPTION_COLORS[themeKey],
+                },
+                width: "140px",
+                borderRadius: 1,
+                padding: 1,
+              }}
+              onClick={() => changeTheme(themeKey)}
+            >
+              <ListItemIcon>
+                {currentTheme === themeKey && (
+                  <CheckIcon
+                    fontSize="small"
+                    sx={{
+                      color: (theme) =>
+                        themeKey === "dark"
+                          ? theme.palette.grey[400]
+                          : theme.palette.grey[900],
+                    }}
+                  />
+                )}
+              </ListItemIcon>
+              <ListItemText>{themeKey}</ListItemText>
+            </MenuItem>
+          ))}
+        </Stack>
+      </Menu>
+    </>
   );
-};
+}
