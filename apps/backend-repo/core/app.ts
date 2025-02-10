@@ -1,44 +1,51 @@
-import type { HttpError } from "http-errors";
 import createError from "http-errors";
-import type { Request, Response, NextFunction } from "express";
 import express from "express";
 import cookieParser from "cookie-parser";
-import serverLogger from "morgan";
-import logger from "jet-logger";
+import logger from "morgan";
+
+import type { HttpError } from "http-errors";
+import type { Request, Response, NextFunction } from "express";
 
 import "dotenv/config";
 
-import { indexRouter } from "@/routes/index";
-import usersRouter from "@/routes/users";
+import { userRoutes } from "../routes/userRoutes";
 
 const PORT = process.env.PORT || 9000;
 
 const app = express();
 
-app.use(serverLogger("dev"));
+app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use("/users", userRoutes);
 
 // catch 404 and forward to error handler
 app.use((req: Request, res: Response, next: NextFunction) => {
-  next(createError(404));
+  next(
+    createError(404, "Not Found - The requested resource could not be found.")
+  );
 });
 
-// error handler
+// Error handling middleware
 app.use((err: HttpError, req: Request, res: Response) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
 
-  // render the error page
+  // Set the response status code, defaulting to 500 if not specified.
   res.status(err.status || 500);
-  res.render("error");
+
+  // Respond with a JSON error message.
+  res.json({
+    error: {
+      status: err.status,
+      message: err.message,
+    },
+  });
 });
 
-app.listen(PORT, () => logger.info("Express server started on port: " + PORT));
+app.listen(PORT, () => console.info("Express server started on port: " + PORT));
 
 export default app;

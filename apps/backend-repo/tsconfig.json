@@ -1,29 +1,18 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "module": "CommonJS",
-    "lib": ["ES2020"],
-    "strict": true,
-    "baseUrl": "./",
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "paths": {
-      "@/*": ["*"]
-    },
-    "useUnknownInCatchVariables": false
+    "strict": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "resolveJsonModule": true
   },
   "ts-node": {
-    "require": ["tsconfig-paths/register", "./config.ts"]
+    "esm": true,
+    "compiler": "typescript"
   },
-  "include": [
-    "bin",
-    "config",
-    "core",
-    "routes",
-    "scripts",
-    "eslint.config.mjs",
-    "config.ts"
-  ],
+  "include": ["./**/*"],
   "exclude": ["node_modules"]
 }
