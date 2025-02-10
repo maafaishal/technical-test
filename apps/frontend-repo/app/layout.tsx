@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
 import Box from "@mui/material/Box";
 
-import { ThemeProvider } from "@/theme/ThemeContext";
+import type { Metadata } from "next";
+
+import { Providers } from "./Providers";
 
 import "./globals.css";
 
@@ -18,16 +19,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ThemeProvider>
+        <Providers>
           <Box
             sx={{
               bgcolor: "background.default",
               color: "text.primary",
+              minHeight: "100vh",
             }}
           >
             {children}
           </Box>
-        </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );

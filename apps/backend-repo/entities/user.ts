@@ -1,1 +1,1 @@
-export * from "@ebuddy/shared/dist/types/user";
+export type { User } from "@ebuddy/shared/dist/types/user";

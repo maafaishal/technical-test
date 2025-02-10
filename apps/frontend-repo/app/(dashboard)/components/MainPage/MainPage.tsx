@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
@@ -12,10 +10,12 @@ import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid2";
 
-// import { useSignInPage } from "./use-sign-in-page";
+import { FetchButton } from "../FetchButton";
+
+import { useMainPage } from "./use-main-page";
 
 export function MainPage() {
-  const [isEdit, setEdit] = useState(false);
+  const { isEdit, setEdit } = useMainPage();
 
   return (
     <Container sx={{ paddingY: 2 }}>
@@ -24,7 +24,7 @@ export function MainPage() {
           <Typography component="h1" variant="h5" gutterBottom>
             Welcome, a@a.com!
           </Typography>
-          <Button variant="contained">Fetch data</Button>
+          <FetchButton />
         </Box>
         <Card sx={{ minWidth: 275 }}>
           <CardContent>

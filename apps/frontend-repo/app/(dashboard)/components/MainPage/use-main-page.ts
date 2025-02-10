@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -9,7 +11,7 @@ const schema = z.object({
     .min(8, { message: "Password must be at least 6 characters long." }),
 });
 
-export const useSignInPage = () => {
+export const useMainPage = () => {
   const {
     register,
     handleSubmit: handleSubmitUseForm,
@@ -18,9 +20,13 @@ export const useSignInPage = () => {
     resolver: zodResolver(schema),
   });
 
+  const [isEdit, setEdit] = useState(false);
+
   const handleSubmit = handleSubmitUseForm((data) => console.log(data));
 
   return {
+    isEdit,
+    setEdit,
     errors,
     register,
     handleSubmit,
