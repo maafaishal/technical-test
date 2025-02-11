@@ -15,8 +15,7 @@ const schema = z.object({
 
 export const useSignInPage = () => {
   const dispatch = useAppDispatch();
-  const loading = useAppSelector((state) => state.auth.loading);
-  const error = useAppSelector((state) => state.auth.error);
+  const processLoading = useAppSelector((state) => state.auth.processLoading);
 
   const {
     register,
@@ -37,6 +36,7 @@ export const useSignInPage = () => {
   });
 
   return {
+    processLoading,
     errors,
     register,
     handleSubmit,

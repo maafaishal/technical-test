@@ -12,8 +12,13 @@ import { Container, Card } from "./SignInPage.styles";
 import { useSignInPage } from "./use-sign-in-page";
 
 export function SignInPage() {
-  const { register, errors, handleSubmit, handleSignInWithPopup } =
-    useSignInPage();
+  const {
+    processLoading,
+    register,
+    errors,
+    handleSubmit,
+    handleSignInWithPopup,
+  } = useSignInPage();
 
   return (
     <Container direction="column" justifyContent="space-between">
@@ -68,7 +73,13 @@ export function SignInPage() {
               {...register("password")}
             />
           </FormControl>
-          <Button type="submit" fullWidth variant="contained">
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            loading={processLoading}
+            disabled={processLoading}
+          >
             Sign in
           </Button>
         </Box>
@@ -79,6 +90,7 @@ export function SignInPage() {
             variant="outlined"
             onClick={handleSignInWithPopup}
             startIcon={<GoogleIcon />}
+            disabled={processLoading}
           >
             Sign in with Google
           </Button>

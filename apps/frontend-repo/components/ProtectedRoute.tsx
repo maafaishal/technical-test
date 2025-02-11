@@ -11,7 +11,7 @@ import { useEffect } from "react";
 export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
-  const authLoading = useAppSelector((state) => state.auth.loading);
+  const authLoading = useAppSelector((state) => state.auth.initialLoading);
 
   useEffect(() => {
     if (!authLoading && !isAuthenticated) router.push("/sign-in");

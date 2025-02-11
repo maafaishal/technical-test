@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import type { Metadata } from "next";
 
 import { Providers } from "./Providers";
+import { ErrorSnackbar } from "@/components/ErrorSnackbar";
 
 import "./globals.css";
 
@@ -28,6 +29,7 @@ export default function RootLayout({
             }}
           >
             {children}
+            <ErrorSnackbar />
           </Box>
         </Providers>
       </body>

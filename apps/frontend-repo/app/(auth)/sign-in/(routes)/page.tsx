@@ -13,7 +13,7 @@ import { SignInPage } from "../components/SignInPage";
 export default function SignIn() {
   const router = useRouter();
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
-  const authLoading = useAppSelector((state) => state.auth.loading);
+  const authLoading = useAppSelector((state) => state.auth.initialLoading);
 
   useEffect(() => {
     if (!authLoading && isAuthenticated) router.push("/");

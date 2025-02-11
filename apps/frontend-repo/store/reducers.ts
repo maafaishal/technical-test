@@ -19,7 +19,8 @@ type UserInitialState = {
 type AuthInitialState = {
   userId: string | null;
   isAuthenticated: boolean;
-  loading: boolean;
+  initialLoading: boolean;
+  processLoading: boolean;
   token: string | null;
   error: string | null;
 };
@@ -34,7 +35,8 @@ const authInitialState: AuthInitialState = {
   userId: null,
   isAuthenticated: false,
   token: null,
-  loading: true,
+  initialLoading: true,
+  processLoading: false,
   error: null,
 };
 
@@ -80,57 +82,57 @@ export const authSlice = createSlice({
       action: { payload: { userId: string; token: string } }
     ) => {
       state.isAuthenticated = true;
-      state.loading = false;
+      state.initialLoading = false;
       state.userId = action.payload.userId;
       state.token = action.payload.token;
     },
     setNotAuthenticated: (state) => {
       state.isAuthenticated = false;
-      state.loading = false;
+      state.initialLoading = false;
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(signInWithEmailAndPassword.pending, (state) => {
-        state.loading = true;
+        state.processLoading = true;
         state.error = null;
       })
       .addCase(signInWithEmailAndPassword.fulfilled, (state, action) => {
-        state.loading = false;
+        state.processLoading = false;
         state.userId = action.payload.uid;
         state.token = action.payload.token;
         state.isAuthenticated = true;
       })
       .addCase(signInWithEmailAndPassword.rejected, (state, action) => {
-        state.loading = false;
+        state.processLoading = false;
         state.error = action.payload as string;
       })
       .addCase(signInWithPopup.pending, (state) => {
-        state.loading = true;
+        state.processLoading = true;
         state.error = null;
       })
       .addCase(signInWithPopup.fulfilled, (state, action) => {
-        state.loading = false;
+        state.processLoading = false;
         state.userId = action.payload.uid;
         state.token = action.payload.token;
         state.isAuthenticated = true;
       })
       .addCase(signInWithPopup.rejected, (state, action) => {
-        state.loading = false;
+        state.processLoading = false;
         state.error = action.payload as string;
       })
       .addCase(signOut.pending, (state) => {
-        state.loading = true;
+        state.processLoading = true;
         state.error = null;
       })
       .addCase(signOut.fulfilled, (state) => {
-        state.loading = false;
+        state.processLoading = false;
         state.userId = "";
         state.token = "";
         state.isAuthenticated = false;
       })
       .addCase(signOut.rejected, (state, action) => {
-        state.loading = false;
+        state.processLoading = false;
         state.error = action.payload as string;
       });
   },
