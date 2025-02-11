@@ -7,9 +7,9 @@ import cors from "cors";
 import type { HttpError } from "http-errors";
 import type { Request, Response, NextFunction } from "express";
 
-import "dotenv/config";
-
 import { userRoutes } from "../routes/userRoutes";
+
+import "dotenv/config";
 
 const PORT = process.env.PORT || 9000;
 
@@ -37,10 +37,8 @@ app.use((err: HttpError, req: Request, res: Response, _: NextFunction) => {
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
 
-  // Set the response status code, defaulting to 500 if not specified.
   res.status(err.status || 500);
 
-  // Respond with a JSON error message.
   res.json({
     error: {
       status: err.status,

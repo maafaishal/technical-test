@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect } from "react";
 
 import Alert from "@mui/material/Alert";
-import type { SnackbarCloseReason } from "@mui/material/Snackbar";
 import Snackbar from "@mui/material/Snackbar";
 
 import { useAppSelector } from "@/store/store";
@@ -25,14 +24,7 @@ export const ErrorSnackbar = () => {
     }
   }, [errorMessage]);
 
-  const handleClose = (
-    event: React.SyntheticEvent | Event,
-    reason?: SnackbarCloseReason
-  ) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
+  const handleClose = () => {
     setOpen(false);
   };
 

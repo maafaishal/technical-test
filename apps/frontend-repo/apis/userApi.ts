@@ -2,14 +2,14 @@ import type { User } from "@ebuddy/shared";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-const getAuthHeader = (token: string) => ({
+const getHeader = (token: string) => ({
   Authorization: `Bearer ${token}`,
   "Content-Type": "application/json",
 });
 
 export const fetchUserData = async (userId: User["id"], token: string) => {
   const response = await fetch(`${API_URL}/users/fetch-user-data/${userId}`, {
-    headers: getAuthHeader(token),
+    headers: getHeader(token),
   });
 
   const responseJson = await response.json();
@@ -30,11 +30,11 @@ export const fetchUserData = async (userId: User["id"], token: string) => {
 export const updateUserData = async (
   userId: User["id"],
   newData: User,
-  token: string,
+  token: string
 ) => {
-  const response = await fetch(`${API_URL}/users/fetch-user-data/${userId}`, {
+  const response = await fetch(`${API_URL}/users/update-user-data/${userId}`, {
     method: "PATCH",
-    headers: getAuthHeader(token),
+    headers: getHeader(token),
     body: JSON.stringify(newData),
   });
 

@@ -1,9 +1,8 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth, connectAuthEmulator } from "firebase/auth";
 import { getFunctions, connectFunctionsEmulator } from "firebase/functions";
 
-// TODO: This is intended to be checked by interviewer. The firebase project will be removed once done
+// TODO: This will be removed once done
 const firebaseConfig = {
   apiKey: "AIzaSyCa21Aw_K5p6jzU6YDTGniKK7yJA6sVN68",
   authDomain: "ebuddy-tech-test-cfb0a.firebaseapp.com",

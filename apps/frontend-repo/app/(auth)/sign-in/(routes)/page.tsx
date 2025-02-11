@@ -3,8 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
+import { PageLoader } from "@/components/ui/PageLoader";
 
 import { useAppSelector } from "@/store/store";
 
@@ -20,19 +19,7 @@ export default function SignIn() {
   }, [authLoading, isAuthenticated, router]);
 
   if (authLoading || isAuthenticated) {
-    return (
-      <Box
-        sx={{
-          display: "flex",
-          width: "100vw",
-          height: "100vh",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <CircularProgress />
-      </Box>
-    );
+    return <PageLoader />;
   }
 
   return <SignInPage />;

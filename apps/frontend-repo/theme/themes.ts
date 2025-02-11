@@ -8,32 +8,67 @@ export type Themes = keyof typeof themes;
 
 /* ==================== Implementation ==================== */
 
-const systemTheme = {
-  colorSchemes: {
-    dark: false,
-  },
-};
-
 const lightTheme = {
-  colorSchemes: {
-    dark: false,
+  palette: {
+    mode: "light" as const,
+    primary: {
+      main: "#1976d2",
+    },
+    secondary: {
+      main: "#dc004e",
+    },
+    background: {
+      default: "#ffffff",
+      paper: "#f5f5f5",
+    },
+    text: {
+      primary: "#000000",
+      secondary: "#000000",
+    },
   },
 };
 
 const darkTheme = {
-  colorSchemes: {
-    dark: true,
+  palette: {
+    mode: "dark" as const,
+    primary: {
+      main: "#90caf9",
+    },
+    secondary: {
+      main: "#f48fb1",
+    },
+    background: {
+      default: "#121212",
+      paper: "#424242",
+    },
+    text: {
+      primary: "#ffffff",
+      secondary: "#ffffff",
+    },
   },
 };
 
 const retroTheme = {
-  colorSchemes: {
-    dark: true,
+  palette: {
+    primary: {
+      main: "#282425",
+    },
+    secondary: {
+      main: "#e4d8b4",
+    },
+    background: {
+      default: "#ece3ca",
+      paper: "#e4d8b4",
+    },
+    text: {
+      primary: "#282425",
+      secondary: "#282425",
+    },
   },
 };
 
 export const themes = {
-  system: createTheme(systemTheme),
+  system: {},
   light: createTheme(lightTheme),
   dark: createTheme(darkTheme),
   retro: createTheme(retroTheme),

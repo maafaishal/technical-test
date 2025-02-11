@@ -9,6 +9,8 @@ import {
 
 import type { User } from "@ebuddy/shared";
 
+/* ==================== Types ==================== */
+
 type UserInitialState = {
   data: User | null;
   loading: boolean;
@@ -23,6 +25,8 @@ type AuthInitialState = {
   token: string | null;
   error: string | null;
 };
+
+/* ==================== Implementation ==================== */
 
 const userInitialState: UserInitialState = {
   data: null,

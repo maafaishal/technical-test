@@ -5,6 +5,8 @@ import * as userRepository from "../repository/userCollection";
 
 import type { NextFunction, Request, Response } from "express";
 
+/* ==================== Schemas ==================== */
+
 const allQuerySchema = z.object({
   pageSize: z
     .string()
@@ -20,6 +22,8 @@ const userSchema = z.object({
   numberOfRents: z.number().optional(),
   recentlyActive: z.number().optional(),
 });
+
+/* ==================== Controllers ==================== */
 
 // This is the POC for part 4
 export const getAllUsers = async (
@@ -65,6 +69,7 @@ export const fetchUser = async (
 ) => {
   try {
     const { userId } = req.params;
+    console.log("🚀 ~ userId:", userId);
 
     const userData = await userRepository.getById(userId);
 

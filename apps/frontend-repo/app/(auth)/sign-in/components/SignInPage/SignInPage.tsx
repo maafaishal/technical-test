@@ -5,6 +5,8 @@ import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 
+import { PasswordInput } from "@/components/ui/PasswordInput";
+
 import { Container, Card } from "./SignInPage.styles";
 import { useSignInPage } from "./use-sign-in-page";
 
@@ -50,11 +52,10 @@ export function SignInPage() {
           </FormControl>
           <FormControl>
             <FormLabel htmlFor="password">Password</FormLabel>
-            <TextField
+            <PasswordInput
               error={Boolean(errors.password)}
               helperText={errors.password?.message?.toString()}
               placeholder="••••••"
-              type="password"
               id="password"
               autoComplete="current-password"
               autoFocus

@@ -1,12 +1,8 @@
 import Stack from "@mui/material/Stack";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
 
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 
-import { ThemeSwitcher } from "@/components/ThemeSwitcher";
-
-import { LogoutButton } from "./components/LogoutButton";
+import { Header } from "./components/Header";
 
 export default function DashboardLayout({
   children,
@@ -16,12 +12,7 @@ export default function DashboardLayout({
   return (
     <ProtectedRoute>
       <Stack>
-        <AppBar position="static" color="inherit" sx={{ padding: 2 }}>
-          <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 2 }}>
-            <ThemeSwitcher />
-            <LogoutButton />
-          </Box>
-        </AppBar>
+        <Header />
         {children}
       </Stack>
     </ProtectedRoute>

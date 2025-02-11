@@ -49,8 +49,9 @@ export const getAll = async ({
 };
 
 export const getById = async (id: User["id"]) => {
-  const docRef = db.collection("users").doc(id);
-  const doc = await docRef.get();
+  const doc = await db.collection("users").doc(id).get();
+  console.log("🚀 ~ getById ~ id:", id);
+  console.log("🚀 ~ getById ~ doc:", doc);
 
   if (!doc.exists) {
     return undefined;

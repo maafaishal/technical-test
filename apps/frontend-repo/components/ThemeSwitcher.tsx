@@ -16,7 +16,7 @@ import { themeKeys } from "@/theme/themes";
 
 import type { Themes } from "@/theme/themes";
 
-const OPTION_COLORS: Record<Themes, string> = {
+const BOX_OPTION_COLORS: Record<Themes, string> = {
   system: "#ffffff",
   light: "#ffffff",
   dark: "#121212",
@@ -65,13 +65,13 @@ export function ThemeSwitcher() {
             <MenuItem
               key={themeKey}
               sx={{
-                backgroundColor: OPTION_COLORS[themeKey],
+                backgroundColor: BOX_OPTION_COLORS[themeKey],
                 color: (theme) =>
                   themeKey === "dark"
                     ? theme.palette.grey[400]
                     : theme.palette.grey[900],
                 "&:hover": {
-                  backgroundColor: OPTION_COLORS[themeKey],
+                  backgroundColor: BOX_OPTION_COLORS[themeKey],
                 },
                 width: "140px",
                 borderRadius: 1,

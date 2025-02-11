@@ -5,8 +5,6 @@ import type { Metadata } from "next";
 import { Providers } from "./Providers";
 import { ErrorSnackbar } from "@/components/ErrorSnackbar";
 
-import "./globals.css";
-
 export const metadata: Metadata = {
   title: "Ebuddy Technical test",
   description: "Ebuddy Technical test",

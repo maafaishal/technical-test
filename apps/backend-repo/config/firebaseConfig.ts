@@ -1,12 +1,10 @@
 import * as admin from "firebase-admin";
+import "dotenv/config";
 
-import serviceAccount from "../serviceAccountKey.json";
-
-// Ensure the serviceAccount is typed correctly
 const app = admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount as admin.ServiceAccount),
+  credential: admin.credential.applicationDefault(),
+  projectId: "ebuddy-tech-test-cfb0a",
 });
 
 export const db = admin.firestore(app);
-
 export const auth = admin.auth(app);

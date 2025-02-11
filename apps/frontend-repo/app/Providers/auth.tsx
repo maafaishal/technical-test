@@ -10,8 +10,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   onAuthStateChanged(auth, async (user) => {
     if (user) {
-      const token = await user.getIdToken();
-      console.log("🚀 ~ onAuthStateChanged ~ token:", token);
+      const token =
+        process.env.NODE_ENV === "development"
+          ? "dummy-token"
+          : await user.getIdToken();
 
       dispatch(setAuthenticated({ userId: user.uid, token }));
     } else {

@@ -4,7 +4,7 @@ import {
   signOut as signOutFirebase,
 } from "firebase/auth";
 
-import { getErrorMessage } from "@/utils/errorMessage";
+import { getErrorMessage } from "@ebuddy/shared/dist/utils/errorMessage";
 import { auth } from "@/config/firebaseConfig";
 
 import {
@@ -12,8 +12,8 @@ import {
   updateUserData as updateUserDataAPI,
 } from "@/apis/userApi";
 
-import type { RootState } from "./store";
 import type { User } from "@ebuddy/shared";
+import type { RootState } from "./store";
 
 export { setAuthenticated, setNotAuthenticated } from "./reducers";
 
@@ -29,6 +29,11 @@ export const fetchUserData = createAsyncThunk<
       state.auth.userId || "",
       state.auth.token || ""
     );
+
+    if (!response.success) {
+      throw new Error(response.message);
+    }
+
     return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(getErrorMessage(error));
@@ -37,9 +42,9 @@ export const fetchUserData = createAsyncThunk<
 
 export const updateUserData = createAsyncThunk<
   User,
-  { newData: User },
+  User,
   { state: RootState }
->("user/updateUserData", async ({ newData }, thunkAPI) => {
+>("user/updateUserData", async (newData, thunkAPI) => {
   try {
     const state = thunkAPI.getState();
 
@@ -48,6 +53,11 @@ export const updateUserData = createAsyncThunk<
       newData,
       state.auth.token || ""
     );
+
+    if (!response.success) {
+      throw new Error(response.message);
+    }
+
     return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(getErrorMessage(error));

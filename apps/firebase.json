@@ -1,7 +1,4 @@
 {
-  "auth": {
-    "port": 9002
-  },
   "functions": [
     {
       "source": "backend-repo",
