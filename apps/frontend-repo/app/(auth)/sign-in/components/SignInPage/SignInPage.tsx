@@ -1,24 +1,15 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Divider from "@mui/material/Divider";
 import FormLabel from "@mui/material/FormLabel";
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 
-import { GoogleIcon } from "@/components/customIcons/GoogleIcon";
-
 import { Container, Card } from "./SignInPage.styles";
 import { useSignInPage } from "./use-sign-in-page";
 
 export function SignInPage() {
-  const {
-    processLoading,
-    register,
-    errors,
-    handleSubmit,
-    handleSignInWithPopup,
-  } = useSignInPage();
+  const { processLoading, register, errors, handleSubmit } = useSignInPage();
 
   return (
     <Container direction="column" justifyContent="space-between">
@@ -81,18 +72,6 @@ export function SignInPage() {
             disabled={processLoading}
           >
             Sign in
-          </Button>
-        </Box>
-        <Divider>or</Divider>
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-          <Button
-            fullWidth
-            variant="outlined"
-            onClick={handleSignInWithPopup}
-            startIcon={<GoogleIcon />}
-            disabled={processLoading}
-          >
-            Sign in with Google
           </Button>
         </Box>
       </Card>

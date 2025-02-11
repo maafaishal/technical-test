@@ -4,7 +4,6 @@ import {
   fetchUserData,
   updateUserData,
   signInWithEmailAndPassword,
-  signInWithPopup,
   signOut,
 } from "./actions";
 
@@ -104,20 +103,6 @@ export const authSlice = createSlice({
         state.isAuthenticated = true;
       })
       .addCase(signInWithEmailAndPassword.rejected, (state, action) => {
-        state.processLoading = false;
-        state.error = action.payload as string;
-      })
-      .addCase(signInWithPopup.pending, (state) => {
-        state.processLoading = true;
-        state.error = null;
-      })
-      .addCase(signInWithPopup.fulfilled, (state, action) => {
-        state.processLoading = false;
-        state.userId = action.payload.uid;
-        state.token = action.payload.token;
-        state.isAuthenticated = true;
-      })
-      .addCase(signInWithPopup.rejected, (state, action) => {
         state.processLoading = false;
         state.error = action.payload as string;
       })

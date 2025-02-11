@@ -1,12 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
-  signInWithPopup as signInWithPopupFirebase,
   signInWithEmailAndPassword as signInWithEmailAndPasswordFirebase,
   signOut as signOutFirebase,
 } from "firebase/auth";
 
 import { getErrorMessage } from "@/utils/errorMessage";
-import { auth, provider } from "@/config/firebaseConfig";
+import { auth } from "@/config/firebaseConfig";
 
 import {
   fetchUserData as fetchUserDataAPI,
@@ -20,13 +19,16 @@ export { setAuthenticated, setNotAuthenticated } from "./reducers";
 
 export const fetchUserData = createAsyncThunk<
   User,
-  string,
+  undefined,
   { state: RootState }
->("user/fetchUserData", async (userId: User["id"], thunkAPI) => {
+>("user/fetchUserData", async (_, thunkAPI) => {
   try {
     const state = thunkAPI.getState();
 
-    const response = await fetchUserDataAPI(userId, state.auth.token || "");
+    const response = await fetchUserDataAPI(
+      state.auth.userId || "",
+      state.auth.token || ""
+    );
     return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(getErrorMessage(error));
@@ -35,14 +37,14 @@ export const fetchUserData = createAsyncThunk<
 
 export const updateUserData = createAsyncThunk<
   User,
-  { userId: User["id"]; newData: User },
+  { newData: User },
   { state: RootState }
->("user/updateUserData", async ({ userId, newData }, thunkAPI) => {
+>("user/updateUserData", async ({ newData }, thunkAPI) => {
   try {
     const state = thunkAPI.getState();
 
     const response = await updateUserDataAPI(
-      userId,
+      state.auth.userId || "",
       newData,
       state.auth.token || ""
     );
@@ -63,26 +65,10 @@ export const signInWithEmailAndPassword = createAsyncThunk<
       email,
       password
     );
+    console.log("🚀 ~ > ~ userCredential:", userCredential);
 
     const uid = userCredential.user.uid;
     const token = await userCredential.user.getIdToken();
-
-    return { uid, token };
-  } catch (error) {
-    return thunkAPI.rejectWithValue(getErrorMessage(error));
-  }
-});
-
-export const signInWithPopup = createAsyncThunk<
-  { uid: string; token: string },
-  undefined,
-  { state: RootState }
->("auth/signInWithPopup", async (_, thunkAPI) => {
-  try {
-    const result = await signInWithPopupFirebase(auth, provider);
-
-    const uid = result.user.uid;
-    const token = await result.user.getIdToken();
 
     return { uid, token };
   } catch (error) {

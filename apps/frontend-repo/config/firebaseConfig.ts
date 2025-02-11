@@ -1,14 +1,9 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import {
-  getAuth,
-  connectAuthEmulator,
-  GoogleAuthProvider,
-} from "firebase/auth";
+import { getAuth, connectAuthEmulator } from "firebase/auth";
 import { getFunctions, connectFunctionsEmulator } from "firebase/functions";
 
-// This is intended to be checked by interviewer
-// The firebase project will be removed once done
+// TODO: This is intended to be checked by interviewer. The firebase project will be removed once done
 const firebaseConfig = {
   apiKey: "AIzaSyCa21Aw_K5p6jzU6YDTGniKK7yJA6sVN68",
   authDomain: "ebuddy-tech-test-cfb0a.firebaseapp.com",
@@ -24,9 +19,7 @@ const firebaseApp = initializeApp(firebaseConfig);
 export const auth = getAuth(firebaseApp);
 export const functions = getFunctions(firebaseApp);
 
-export const provider = new GoogleAuthProvider();
-
-// if (process.env.NODE_ENV === "development") {
-//   connectAuthEmulator(auth, "http://127.0.0.1:9099");
-//   connectFunctionsEmulator(functions, "127.0.0.1", 5001);
-// }
+if (process.env.NODE_ENV === "development") {
+  connectAuthEmulator(auth, "http://127.0.0.1:9099");
+  connectFunctionsEmulator(functions, "127.0.0.1", 5001);
+}

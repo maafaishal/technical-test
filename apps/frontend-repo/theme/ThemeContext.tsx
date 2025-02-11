@@ -3,12 +3,14 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { useLocalStorage } from "usehooks-ts";
 
+import CssBaseline from "@mui/material/CssBaseline";
 import {
   ThemeProvider as MUIThemeProvider,
   useMediaQuery,
 } from "@mui/material";
 
-import { themes, themeKeys, Themes } from "./themes";
+import type { Themes } from "./themes";
+import { themes, themeKeys } from "./themes";
 
 /* ==================== Types ==================== */
 
@@ -52,7 +54,10 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
 
   return (
     <ThemeContext.Provider value={{ currentTheme, changeTheme }}>
-      <MUIThemeProvider theme={themes[theme]}>{children}</MUIThemeProvider>
+      <MUIThemeProvider theme={themes[theme]}>
+        <CssBaseline />
+        {children}
+      </MUIThemeProvider>
     </ThemeContext.Provider>
   );
 };

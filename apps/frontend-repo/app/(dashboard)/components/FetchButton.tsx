@@ -10,7 +10,7 @@ export const FetchButton = () => {
   const loading = useAppSelector((state) => state.user.loading);
 
   const handleClick = () => {
-    dispatch(fetchUserData("user1"));
+    dispatch(fetchUserData());
   };
 
   return (
