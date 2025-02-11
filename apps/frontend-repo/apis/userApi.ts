@@ -1,6 +1,6 @@
 import type { User } from "@ebuddy/shared";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:9000";
 
 const getHeader = (token: string) => ({
   Authorization: `Bearer ${token}`,

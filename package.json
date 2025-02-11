@@ -9,7 +9,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "prepare": "husky",
     "lint-staged": "turbo run lint-staged",
-    "start:emulators": "cd apps && npm run dev"
+    "start:emulators": "cd apps/backend-repo && npm run dev:emulator"
   },
   "devDependencies": {
     "turbo": "^2.4.0",

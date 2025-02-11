@@ -58,7 +58,7 @@ export function MainPage() {
                   (isEdit ? (
                     <Box sx={{ display: "flex", gap: 2 }}>
                       <Button type="submit" variant="contained">
-                        Submit
+                        Save
                       </Button>
                       <Button variant="outlined" onClick={() => setEdit(false)}>
                         Cancel

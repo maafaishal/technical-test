@@ -112,7 +112,7 @@ export const updateUser = async (
 
     await userRepository.update(userId, parseResult.data);
 
-    return res.json(parseResult.data);
+    return res.json({ id: userId, ...parseResult.data });
   } catch (error) {
     console.error("[Error] users/updateUser: ", error);
     next(

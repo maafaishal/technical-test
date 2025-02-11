@@ -59,6 +59,8 @@ export const useMainPage = () => {
       setValue("numberOfRents", userData.numberOfRents);
       setValue("recentlyActive", dayjs.unix(userData.recentlyActive));
       setRecentlyActive(dayjs.unix(userData.recentlyActive));
+
+      setEdit(false);
     }
   }, [setValue, userData]);
 
