@@ -26,6 +26,7 @@ export function MainPage() {
     userData,
     userLoading,
     errors,
+    errorMessage,
     recentlyActive,
     handleClickFetch,
     handleSubmit,
@@ -165,6 +166,17 @@ export function MainPage() {
                 </Grid>
               )}
             </Box>
+            {errorMessage && (
+              <Typography
+                component="h1"
+                variant="h6"
+                gutterBottom
+                color="error"
+                sx={{ marginTop: 2 }}
+              >
+                Error: {errorMessage}
+              </Typography>
+            )}
           </CardContent>
         </Card>
       </Stack>

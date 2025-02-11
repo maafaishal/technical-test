@@ -11,7 +11,8 @@ import { Container, Card } from "./SignInPage.styles";
 import { useSignInPage } from "./use-sign-in-page";
 
 export function SignInPage() {
-  const { processLoading, register, errors, handleSubmit } = useSignInPage();
+  const { processLoading, register, errors, errorMessage, handleSubmit } =
+    useSignInPage();
 
   return (
     <Container direction="column" justifyContent="space-between">
@@ -74,6 +75,11 @@ export function SignInPage() {
           >
             Sign in
           </Button>
+          {errorMessage && (
+            <Typography component="h1" variant="h6" gutterBottom color="error">
+              Error: {errorMessage}
+            </Typography>
+          )}
         </Box>
       </Card>
     </Container>

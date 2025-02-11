@@ -31,6 +31,7 @@ export const useMainPage = () => {
 
   const userData = useAppSelector((state) => state.user.data);
   const userLoading = useAppSelector((state) => state.user.loading);
+  const errorMessage = useAppSelector((state) => state.user.error);
 
   const handleClickFetch = () => {
     dispatch(fetchUserData());
@@ -72,6 +73,7 @@ export const useMainPage = () => {
     errors,
     register,
     recentlyActive,
+    errorMessage,
     handleSubmit,
     handleChangeDate,
     handleClickFetch,

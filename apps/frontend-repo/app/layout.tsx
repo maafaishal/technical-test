@@ -3,7 +3,6 @@ import Box from "@mui/material/Box";
 import type { Metadata } from "next";
 
 import { Providers } from "./Providers";
-import { ErrorSnackbar } from "@/components/ErrorSnackbar";
 
 export const metadata: Metadata = {
   title: "Ebuddy Technical test",
@@ -27,7 +26,6 @@ export default function RootLayout({
             }}
           >
             {children}
-            <ErrorSnackbar />
           </Box>
         </Providers>
       </body>
