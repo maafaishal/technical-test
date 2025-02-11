@@ -16,7 +16,7 @@ In order to efficiently retrieve the highest potential users, the following is t
 
 **1. Firestore Index Configuration**
 
-We need to implement a composite index in Firestore or definet it locally in`firestore.indexes.json`:
+We need to implement a composite index in Firestore or define it locally in`firestore.indexes.json`:
 
 ```
 {
@@ -59,5 +59,5 @@ collection
 **Explanation**
 
 - `orderBy`: Ensures sorting based on the given priorities, totalAverageWeightRatings -> numberOfRents -> recentlyActive
-- `startAfter(lastDoc)`: Supports pagination by retrieving the next set of databased on the last document from the previous query
+- `startAfter(lastDoc)`: Supports pagination by retrieving the next set of data based on the last document from the previous query
 - `limit(pageSize)`: Limits the number of retrieved documents per page for efficient pagination
