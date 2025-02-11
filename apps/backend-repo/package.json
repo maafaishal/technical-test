@@ -5,10 +5,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "NODE_ENV=development ts-node-dev core/app.ts",
-    "dev:emulator": "npm run build && firebase emulators:start --only functions,firestore,auth",
-    "lint": "eslint .",
-    "shell": "npm run build && firebase functions:shell",
-    "start": "npm run shell"
+    "dev:emulators": "npm run build && firebase emulators:start --only functions,firestore,auth",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@ebuddy/shared": "workspace:^",

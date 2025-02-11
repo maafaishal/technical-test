@@ -1,84 +1,66 @@
-# Turborepo starter
+# EBUDDY Technical Test Solution
 
-This Turborepo starter is maintained by the Turborepo core team.
+A repository contains the implementation of the EBUDDY technical test, including both frontend and backend components.
 
-## Using this example
+## Prerequisites
 
-Run the following command:
+- Node.js v20 or higher
+- pnpm v9.15.5 or higher
+- Firebase CLI
+- Firebase Emulator Suite
 
-```sh
-npx create-turbo@latest
-```
-
-## What's inside?
-
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
+## Project Structure
 
 ```
-cd my-turborepo
-pnpm build
+root/
+├── apps/
+│   ├── backend-repo/  # Express.js backend
+│   └── frontend-repo/ # Next.js frontend
+├── packages/
+│   └── shared/ # Shared types and utilities
+└── package.json
 ```
 
-### Develop
+## Getting Started
 
-To develop all apps and packages, run the following command:
+1. Install Firebase CLI (if you haven't):
 
-```
-cd my-turborepo
-pnpm dev
-```
-
-### Remote Caching
-
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
+```bash
+npm install -g firebase-tools
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+2. Install dependencies from the root directory:
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
+```bash
+pnpm install
 ```
 
-## Useful Links
+## Running the Project
 
-Learn more about the power of Turborepo:
+### Development Mode
 
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+To run both frontend and backend:
+
+```bash
+npm run dev
+```
+
+To run Firebase emulators:
+
+```bash
+npm run start:emulators
+```
+
+This will start:
+
+- Frontend at http://localhost:3000
+- Backend at http://localhost:9000
+- Firebase Emulator UI at http://localhost:4000
+
+## Available Scripts
+
+- `npm run dev` - Run all services in development mode
+- `npm run build` - Build all applications
+- `npm run lint` - Lint all applications
+- `npm run format` - Format code using Prettier
+- `npm run start:emulators` - Start Firebase Emulator
