@@ -2,6 +2,7 @@ import createError from "http-errors";
 import express from "express";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
+import cors from "cors";
 
 import type { HttpError } from "http-errors";
 import type { Request, Response, NextFunction } from "express";
@@ -14,6 +15,7 @@ const PORT = process.env.PORT || 9000;
 
 const app = express();
 
+app.use(cors());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

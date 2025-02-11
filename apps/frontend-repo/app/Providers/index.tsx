@@ -6,6 +6,8 @@ import { Provider } from "react-redux";
 import { ThemeProvider } from "@/theme/ThemeContext";
 import { makeStore } from "@/store/store";
 
+import { AuthProvider } from "./auth";
+
 import type { AppStore } from "@/store/store";
 
 export const Providers = ({ children }: { children: React.ReactNode }) => {
@@ -14,9 +16,12 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
     // Create the store instance the first time this renders
     storeRef.current = makeStore();
   }
+
   return (
     <Provider store={storeRef.current}>
-      <ThemeProvider>{children}</ThemeProvider>
+      <ThemeProvider>
+        <AuthProvider>{children}</AuthProvider>
+      </ThemeProvider>
     </Provider>
   );
 };

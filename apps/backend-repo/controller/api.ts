@@ -19,8 +19,6 @@ export const fetchUser = async (
   try {
     const { userId } = req.params;
 
-    console.log("wkwkwkwk");
-
     const userData = await userRepository.getById(userId);
 
     if (!userData) {

@@ -1,6 +1,7 @@
 import type { Action, ThunkAction } from "@reduxjs/toolkit";
 import { combineSlices, configureStore } from "@reduxjs/toolkit";
 import { useDispatch, useSelector, useStore } from "react-redux";
+
 import { userSlice, authSlice } from "./reducers";
 
 // `combineSlices` automatically combines the reducers using

@@ -1,24 +1,46 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchUserData, updateUserData } from "./actions";
+import {
+  fetchUserData,
+  updateUserData,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+} from "./actions";
 
 import type { User } from "@ebuddy/shared";
 
-type InitialState = {
+type UserInitialState = {
   data: User | null;
   loading: boolean;
   error: string | null;
 };
 
-const initialState: InitialState = {
+type AuthInitialState = {
+  userId: string | null;
+  isAuthenticated: boolean;
+  loading: boolean;
+  token: string | null;
+  error: string | null;
+};
+
+const userInitialState: UserInitialState = {
   data: null,
   loading: false,
   error: null,
 };
 
+const authInitialState: AuthInitialState = {
+  userId: null,
+  isAuthenticated: false,
+  token: null,
+  loading: true,
+  error: null,
+};
+
 export const userSlice = createSlice({
   name: "user",
-  initialState,
+  initialState: userInitialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -51,9 +73,67 @@ export const userSlice = createSlice({
 
 export const authSlice = createSlice({
   name: "auth",
-  initialState: {
-    isAuthenticated: false,
-    token: "",
+  initialState: authInitialState,
+  reducers: {
+    setAuthenticated: (
+      state,
+      action: { payload: { userId: string; token: string } }
+    ) => {
+      state.isAuthenticated = true;
+      state.loading = false;
+      state.userId = action.payload.userId;
+      state.token = action.payload.token;
+    },
+    setNotAuthenticated: (state) => {
+      state.isAuthenticated = false;
+      state.loading = false;
+    },
   },
-  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(signInWithEmailAndPassword.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(signInWithEmailAndPassword.fulfilled, (state, action) => {
+        state.loading = false;
+        state.userId = action.payload.uid;
+        state.token = action.payload.token;
+        state.isAuthenticated = true;
+      })
+      .addCase(signInWithEmailAndPassword.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(signInWithPopup.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(signInWithPopup.fulfilled, (state, action) => {
+        state.loading = false;
+        state.userId = action.payload.uid;
+        state.token = action.payload.token;
+        state.isAuthenticated = true;
+      })
+      .addCase(signInWithPopup.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(signOut.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(signOut.fulfilled, (state) => {
+        state.loading = false;
+        state.userId = "";
+        state.token = "";
+        state.isAuthenticated = false;
+      })
+      .addCase(signOut.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      });
+  },
 });
+
+export const { setAuthenticated, setNotAuthenticated } = authSlice.actions;

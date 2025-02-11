@@ -1,5 +1,9 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useAppDispatch, useAppSelector } from "@/store/store";
+
+import { signInWithPopup, signInWithEmailAndPassword } from "@/store/actions";
+
 import * as z from "zod";
 
 const schema = z.object({
@@ -10,6 +14,10 @@ const schema = z.object({
 });
 
 export const useSignInPage = () => {
+  const dispatch = useAppDispatch();
+  const loading = useAppSelector((state) => state.auth.loading);
+  const error = useAppSelector((state) => state.auth.error);
+
   const {
     register,
     handleSubmit: handleSubmitUseForm,
@@ -18,11 +26,20 @@ export const useSignInPage = () => {
     resolver: zodResolver(schema),
   });
 
-  const handleSubmit = handleSubmitUseForm((data) => console.log(data));
+  const handleSignInWithPopup = async () => {
+    dispatch(signInWithPopup());
+  };
+
+  const handleSubmit = handleSubmitUseForm(async (data) => {
+    dispatch(
+      signInWithEmailAndPassword({ email: data.email, password: data.password })
+    );
+  });
 
   return {
     errors,
     register,
     handleSubmit,
+    handleSignInWithPopup,
   };
 };

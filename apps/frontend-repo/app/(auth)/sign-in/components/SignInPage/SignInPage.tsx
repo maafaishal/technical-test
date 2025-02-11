@@ -12,7 +12,8 @@ import { Container, Card } from "./SignInPage.styles";
 import { useSignInPage } from "./use-sign-in-page";
 
 export function SignInPage() {
-  const { register, errors, handleSubmit } = useSignInPage();
+  const { register, errors, handleSubmit, handleSignInWithPopup } =
+    useSignInPage();
 
   return (
     <Container direction="column" justifyContent="space-between">
@@ -76,7 +77,7 @@ export function SignInPage() {
           <Button
             fullWidth
             variant="outlined"
-            onClick={() => alert("Sign in with Google")}
+            onClick={handleSignInWithPopup}
             startIcon={<GoogleIcon />}
           >
             Sign in with Google

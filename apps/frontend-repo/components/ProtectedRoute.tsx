@@ -1,25 +1,23 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 
 import { useAppSelector } from "@/store/store";
+import { useEffect } from "react";
 
-import { SignInPage } from "../components/SignInPage";
-
-export default function SignIn() {
+export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
   const authLoading = useAppSelector((state) => state.auth.loading);
 
   useEffect(() => {
-    if (!authLoading && isAuthenticated) router.push("/");
+    if (!authLoading && !isAuthenticated) router.push("/sign-in");
   }, [authLoading, isAuthenticated, router]);
 
-  if (authLoading || isAuthenticated) {
+  if (authLoading || !isAuthenticated) {
     return (
       <Box
         sx={{
@@ -35,5 +33,5 @@ export default function SignIn() {
     );
   }
 
-  return <SignInPage />;
-}
+  return children;
+};
