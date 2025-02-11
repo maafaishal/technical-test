@@ -1,0 +1,41 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "test_users",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "totalAverageWeightRatings",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "numberOfRents",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "recentlyActive",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "users",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "totalAverageWeightRatings",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "numberOfRents",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "recentlyActive",
+          "order": "DESCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

@@ -19,11 +19,8 @@ export const authMiddleware = async (
 
     const token = authHeader.split("Bearer ")[1];
 
-    if (
-      process.env.FUNCTIONS_EMULATOR ||
-      process.env.NODE_ENV === "development"
-    ) {
-      if (token === "test-token") {
+    if (process.env.NODE_ENV === "development") {
+      if (token === "dummy-token") {
         console.info("Using test token in emulator/development mode");
         return next();
       }

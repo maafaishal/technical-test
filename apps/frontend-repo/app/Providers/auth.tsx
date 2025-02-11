@@ -11,6 +11,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       const token = await user.getIdToken();
+      console.log("🚀 ~ onAuthStateChanged ~ token:", token);
 
       dispatch(setAuthenticated({ userId: user.uid, token }));
     } else {

@@ -4,10 +4,12 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
+    "dev:all": "turbo dev --parallel",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "prepare": "husky",
-    "lint-staged": "turbo run lint-staged"
+    "lint-staged": "turbo run lint-staged",
+    "start:emulators": "cd apps && firebase emulators:start --import=./emulator-data --export-on-exit"
   },
   "devDependencies": {
     "turbo": "^2.4.0",
@@ -21,7 +23,7 @@
   },
   "packageManager": "pnpm@9.15.5",
   "engines": {
-    "node": ">=22"
+    "node": ">=20"
   },
   "lint-staged": {
     "**/*.{json,md,css}": "pnpm format",

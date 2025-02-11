@@ -65,10 +65,12 @@ export const signInWithEmailAndPassword = createAsyncThunk<
       email,
       password
     );
-    console.log("🚀 ~ > ~ userCredential:", userCredential);
 
     const uid = userCredential.user.uid;
-    const token = await userCredential.user.getIdToken();
+    const token =
+      process.env.NODE_ENV === "development"
+        ? "dummy-token"
+        : await userCredential.user.getIdToken();
 
     return { uid, token };
   } catch (error) {

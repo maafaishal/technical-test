@@ -5,6 +5,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "ts-node-dev core/app.ts",
+    "dev:emulator": "npm run build && firebase emulators:start --only functions,firestore,auth",
     "start": "node dist/core/app.js"
   },
   "dependencies": {
@@ -40,6 +41,6 @@
     "typescript-eslint": "^8.23.0"
   },
   "engines": {
-    "node": ">=22.0.0"
+    "node": ">=20.0.0"
   }
 }
