@@ -69,7 +69,6 @@ export const fetchUser = async (
 ) => {
   try {
     const { userId } = req.params;
-    console.log("🚀 ~ userId:", userId);
 
     const userData = await userRepository.getById(userId);
 
