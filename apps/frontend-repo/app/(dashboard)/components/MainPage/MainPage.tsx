@@ -10,6 +10,7 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import FormLabel from "@mui/material/FormLabel";
 import FormControl from "@mui/material/FormControl";
+import Grid from "@mui/material/Grid2";
 
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -48,6 +49,11 @@ export function MainPage() {
                 sx={{
                   display: "flex",
                   justifyContent: "space-between",
+                  flexDirection: {
+                    xs: "column",
+                    sm: "row",
+                  },
+                  gap: 2,
                   marginBottom: 2,
                 }}
               >
@@ -57,10 +63,18 @@ export function MainPage() {
                 {userData &&
                   (isEdit ? (
                     <Box sx={{ display: "flex", gap: 2 }}>
-                      <Button type="submit" variant="contained">
+                      <Button
+                        sx={{ flexGrow: { xs: 1, sm: 0 } }}
+                        type="submit"
+                        variant="contained"
+                      >
                         Save
                       </Button>
-                      <Button variant="outlined" onClick={() => setEdit(false)}>
+                      <Button
+                        sx={{ flexGrow: { xs: 1, sm: 0 } }}
+                        variant="outlined"
+                        onClick={() => setEdit(false)}
+                      >
                         Cancel
                       </Button>
                     </Box>
@@ -86,61 +100,69 @@ export function MainPage() {
                   </Button>
                 </Box>
               ) : (
-                <Box sx={{ display: "flex", gap: 2, width: "100%" }}>
-                  <FormControl sx={{ flexGrow: 1 }}>
-                    <FormLabel>ID</FormLabel>
-                    <TextField
-                      error={Boolean(errors.userId)}
-                      helperText={errors.userId?.message?.toString()}
-                      type="text"
-                      autoFocus
-                      required
-                      fullWidth
-                      variant="outlined"
-                      disabled={!isEdit}
-                      {...register("userId")}
-                    />
-                  </FormControl>
-                  <FormControl sx={{ flexGrow: 1 }}>
-                    <FormLabel>Average Weighted Ratings</FormLabel>
-                    <TextField
-                      error={Boolean(errors.totalAverageWeightRatings)}
-                      helperText={errors.userId?.message?.toString()}
-                      type="number"
-                      autoFocus
-                      required
-                      fullWidth
-                      variant="outlined"
-                      disabled={!isEdit}
-                      {...register("totalAverageWeightRatings")}
-                    />
-                  </FormControl>
-                  <FormControl sx={{ flexGrow: 1 }}>
-                    <FormLabel>Number of Rents</FormLabel>
-                    <TextField
-                      error={Boolean(errors.numberOfRents)}
-                      helperText={errors.numberOfRents?.message?.toString()}
-                      type="number"
-                      autoFocus
-                      required
-                      fullWidth
-                      variant="outlined"
-                      disabled={!isEdit}
-                      {...register("numberOfRents")}
-                    />
-                  </FormControl>
-                  <FormControl sx={{ flexGrow: 1 }}>
-                    <FormLabel>Recent Activity</FormLabel>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <DatePicker
-                        {...recentlyActiveRegister}
-                        onChange={handleChangeDate}
+                <Grid container spacing={2} columns={{ xs: 1, sm: 2, lg: 4 }}>
+                  <Grid size={1}>
+                    <FormControl sx={{ width: "100%" }}>
+                      <FormLabel>ID</FormLabel>
+                      <TextField
+                        error={Boolean(errors.userId)}
+                        helperText={errors.userId?.message?.toString()}
+                        type="text"
+                        autoFocus
+                        required
+                        fullWidth
+                        variant="outlined"
                         disabled={!isEdit}
-                        value={recentlyActive}
+                        {...register("userId")}
                       />
-                    </LocalizationProvider>
-                  </FormControl>
-                </Box>
+                    </FormControl>
+                  </Grid>
+                  <Grid size={1}>
+                    <FormControl sx={{ width: "100%" }}>
+                      <FormLabel>Average Weighted Ratings</FormLabel>
+                      <TextField
+                        error={Boolean(errors.totalAverageWeightRatings)}
+                        helperText={errors.userId?.message?.toString()}
+                        type="number"
+                        autoFocus
+                        required
+                        fullWidth
+                        variant="outlined"
+                        disabled={!isEdit}
+                        {...register("totalAverageWeightRatings")}
+                      />
+                    </FormControl>
+                  </Grid>
+                  <Grid size={1}>
+                    <FormControl sx={{ width: "100%" }}>
+                      <FormLabel>Number of Rents</FormLabel>
+                      <TextField
+                        error={Boolean(errors.numberOfRents)}
+                        helperText={errors.numberOfRents?.message?.toString()}
+                        type="number"
+                        autoFocus
+                        required
+                        fullWidth
+                        variant="outlined"
+                        disabled={!isEdit}
+                        {...register("numberOfRents")}
+                      />
+                    </FormControl>
+                  </Grid>
+                  <Grid size={1}>
+                    <FormControl sx={{ width: "100%" }}>
+                      <FormLabel>Recent Activity</FormLabel>
+                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DatePicker
+                          {...recentlyActiveRegister}
+                          onChange={handleChangeDate}
+                          disabled={!isEdit}
+                          value={recentlyActive}
+                        />
+                      </LocalizationProvider>
+                    </FormControl>
+                  </Grid>
+                </Grid>
               )}
             </Box>
           </CardContent>
